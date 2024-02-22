@@ -1,0 +1,61 @@
+import java.util.EmptyStackException;
+
+public class ques5 {
+    private int[] stackArray;
+    private int top;
+    private int capacity;
+
+    // Constructor to initialize the stack with a specified capacity
+    public ques5(int capacity) {
+        this.capacity = capacity;
+        stackArray = new int[capacity];
+        top = -1; // Stack is initially empty
+    }
+
+    // Method to push an element onto the stack
+    public void push(int element) {
+        if (isFull()) {
+            System.out.println("Stack is full. Cannot push element " + element);
+            return;
+        }
+        stackArray[++top] = element;
+        System.out.println("Pushed element: " + element);
+    }
+
+    // Method to pop an element from the stack
+    public int pop() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        int poppedElement = stackArray[top];
+        top--;
+        System.out.println("Popped element: " + poppedElement);
+        return poppedElement;
+    }
+
+    // Method to check if the stack is empty
+    public boolean isEmpty() {
+        return top == -1;
+    }
+
+    // Method to check if the stack is full
+    public boolean isFull() {
+        return top == capacity - 1;
+    }
+
+    public static void main(String[] args) {
+        ques5 stack = new ques5(5);
+
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+        stack.push(40);
+        stack.push(50);
+        stack.push(60); // Trying to push more elements than capacity
+
+        System.out.println("Popping elements from the stack:");
+        while (!stack.isEmpty()) {
+            stack.pop();
+        }
+    }
+}
