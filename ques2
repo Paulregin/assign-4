@@ -1,0 +1,74 @@
+// Custom checked exception for invalid voter age
+class InvalidVoterAgeException extends Exception {
+    public InvalidVoterAgeException(String message) {
+        super(message);
+    }
+}
+
+// Voter class
+class Voter {
+    private int voterId;
+    private String name;
+    private int age;
+
+    public Voter(int voterId, String name, int age) throws InvalidVoterAgeException {
+        if (age < 18) {
+            throw new InvalidVoterAgeException("Invalid age for voter");
+        }
+
+        this.voterId = voterId;
+        this.name = name;
+        this.age = age;
+    }
+
+    // Getters and setters
+    public int getVoterId() {
+        return voterId;
+    }
+
+    public void setVoterId(int voterId) {
+        this.voterId = voterId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Voter{" +
+                "voterId=" + voterId +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+
+// Main class
+public class ques2 {
+    public static void main(String[] args) {
+        try {
+            // Creating a voter with valid age
+            Voter validVoter = new Voter(1, "John Doe", 25);
+            System.out.println(validVoter);
+
+            // Creating a voter with invalid age
+            Voter invalidVoter = new Voter(2, "Jane Smith", 17);
+            System.out.println(invalidVoter);
+        } catch (InvalidVoterAgeException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
