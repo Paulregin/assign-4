@@ -1,0 +1,74 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class ques4 {
+    private Map<String, Integer> studentGrades;
+
+    public ques4() {
+        this.studentGrades = new HashMap<>();
+    }
+
+    // Method to add a new student
+    public void addStudent(String name, int grade) {
+        studentGrades.put(name, grade);
+        System.out.println("Student " + name + " added with grade " + grade);
+    }
+
+    // Method to remove a student
+    public void removeStudent(String name) {
+        if (studentGrades.containsKey(name)) {
+            studentGrades.remove(name);
+            System.out.println("Student " + name + " removed");
+        } else {
+            System.out.println("Student " + name + " not found");
+        }
+    }
+
+    // Method to display a student's grade by name
+    public void displayStudentGrade(String name) {
+        if (studentGrades.containsKey(name)) {
+            int grade = studentGrades.get(name);
+            System.out.println("Grade of student " + name + " is " + grade);
+        } else {
+            System.out.println("Student " + name + " not found");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ques4 gradeSystem = new ques4();
+
+        while (true) {
+            System.out.println("\n1. Add Student\n2. Remove Student\n3. Display Student Grade\n4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter student name: ");
+                    String addName = scanner.nextLine();
+                    System.out.print("Enter student grade: ");
+                    int addGrade = scanner.nextInt();
+                    gradeSystem.addStudent(addName, addGrade);
+                    break;
+                case 2:
+                    System.out.print("Enter student name to remove: ");
+                    String removeName = scanner.nextLine();
+                    gradeSystem.removeStudent(removeName);
+                    break;
+                case 3:
+                    System.out.print("Enter student name to display grade: ");
+                    String displayName = scanner.nextLine();
+                    gradeSystem.displayStudentGrade(displayName);
+                    break;
+                case 4:
+                    System.out.println("Exiting program.");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please enter again.");
+            }
+        }
+    }
+}
